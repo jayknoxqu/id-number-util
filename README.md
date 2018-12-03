@@ -92,4 +92,4 @@ if __name__ == '__main__':
     print IdNumberUtil.verify_id('410326199507103198')  # 检验身份证是否正确:False
 ```
 
-[^code]: 代码地址: https://github.com/jayknoxqu/id-number-util
+[1]: 代码地址: https://github.com/jayknoxqu/id-number-util
