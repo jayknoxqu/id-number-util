@@ -16,11 +16,9 @@
 - 最后一位是**校验码**，这里采用的是**ISO 7064:1983,MOD 11-2**校验码系统。校验码为一位数，但如果最后采用校验码系统计算的校验码是“10”，碍于身份证号码为18位的规定，则以“X”代替校验码“10”。
 
 ### 校验码计算方法
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
-<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
- $$xxx$$
--  **1.** 将身份证号码从右至左标记为$a_1 , a_2 , \cdots , a_{18}$，$a_1$即为校验码；
--  **2.** 计算权重系数 $W_i=2^{i-1}\ \bmod \{11}$
+-  **1.** 将身份证号码从右至左标记为![](https://wikimedia.org/api/rest_v1/media/math/render/svg/779a0c3f011a79efb854f48c9a7398cc17b04305)，![](https://wikimedia.org/api/rest_v1/media/math/render/svg/bbf42ecda092975c9c69dae84e16182ba5fe2e07)
+即为校验码；
+-  **2.** 计算权重系数 ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/5f817855c5ad3b88b412e60f83f2201fd386ea2a)
 
 所以:
 
@@ -29,9 +27,8 @@
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:| :-:| :-:|
 | **W<sub>i</sub>** |7|9|10|5|8|4|2|1|6|3|7|9|10|5|8|4|2|1|
 
-- **3.**  计算$ S = \sum_{i=2}^{18} a_i \cdot W_i $
-- **4.**  $ a_1=(12-( S \ \bmod 11)) \bmod 11 $
-<math>a_1=(12-( S \ \bmod 11)) \bmod 11</math>
+- **3.**  计算![](https://wikimedia.org/api/rest_v1/media/math/render/svg/dad8e73b5a78c0c3d0ca9097d64adad4daacbf31)
+- **4.**  ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/81eb5f69ce9a438d004f0fb85b6b14dfa4c3b27a)
 
 使用[Python](https://zh.wikipedia.org/wiki/Python)获取身份证校验码：
 ```Python
