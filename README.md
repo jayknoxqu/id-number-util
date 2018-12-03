@@ -31,6 +31,7 @@
 
 - **3.**  计算$ S = \sum_{i=2}^{18} a_i \cdot W_i $
 - **4.**  $ a_1=(12-( S \ \bmod 11)) \bmod 11 $
+<math>a_1=(12-( S \ \bmod 11)) \bmod 11</math>
 
 使用[Python](https://zh.wikipedia.org/wiki/Python)获取身份证校验码：
 ```Python
@@ -94,4 +95,4 @@ if __name__ == '__main__':
     print IdNumberUtil.verify_id('410326199507103198')  # 检验身份证是否正确:False
 ```
 
-[1]: 代码地址: https://github.com/jayknoxqu/id-number-util
+[√]: 代码地址: https://github.com/jayknoxqu/id-number-util
