@@ -17,6 +17,7 @@
 
 ### 校验码计算方法
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
  $$xxx$$
 -  **1.** 将身份证号码从右至左标记为$a_1 , a_2 , \cdots , a_{18}$，$a_1$即为校验码；
 -  **2.** 计算权重系数 $W_i=2^{i-1}\ \bmod \{11}$
