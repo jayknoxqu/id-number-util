@@ -91,7 +91,7 @@ class IdNumberUtil(object):
 
         id_number += str(birth_days)
         # 顺序码(2位数)
-        id_number += str(random.randint(9, 99))
+        id_number += str(random.randint(10, 99))
         # 性别码(1位数)
         id_number += str(random.randrange(sex, 10, step=2))
         # 校验码(1位数)
