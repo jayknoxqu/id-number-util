@@ -22,7 +22,7 @@ class IdNumber(str):
         self.birth_day = int(self.id[12:14])
 
     def get_area_name(self):
-        """ 根据区域编号取出区域名称 """
+        """根据区域编号取出区域名称"""
         return const.AREA_INFO[self.area_id]
 
     def get_birthday(self):
@@ -43,7 +43,7 @@ class IdNumber(str):
                 return year - self.birth_year
 
     def get_sex(self):
-        """ 通过身份证号获取性别， 女生：0，男生：1"""
+        """通过身份证号获取性别， 女生：0，男生：1"""
         return int(self.id[16:17]) % 2
 
     def get_check_digit(self):
@@ -56,7 +56,7 @@ class IdNumber(str):
 
     @classmethod
     def verify_id(cls, id_number):
-        """ 校验身份证是否正确 """
+        """校验身份证是否正确"""
         if re.match(const.ID_NUMBER_18_REGEX, id_number):
             check_digit = cls(id_number).get_check_digit()
             return str(check_digit) == id_number[-1]
@@ -65,7 +65,7 @@ class IdNumber(str):
 
     @classmethod
     def generate_id(cls, sex=0):
-        """ 随机生成身份证号，sex = 0表示女性，sex = 1表示男性 """
+        """随机生成身份证号，sex = 0表示女性，sex = 1表示男性"""
 
         # 随机生成一个区域码(6位数)
         id_number = str(random.choice(const.AREA_INFO.keys()))
