@@ -33,7 +33,7 @@
 使用[Python](https://zh.wikipedia.org/wiki/Python)获取身份证校验码：
 ```Python
 def get_check_digit(id_number):
-    """通过身份证号获取校验码"""
+    """ 通过身份证号获取校验码 """
     check_sum = 0
     for i in range(0, 17):
         check_sum += ((1 << (17 - i)) % 11) * int(id_number[i])
@@ -48,31 +48,22 @@ def get_check_digit(id_number):
 由上面的组合方式我们可以得出以下代码:
 
  ```python
-@classmethod
-def generate_id(cls, sex=0):
-    """
-     随机生成身份证号，sex = 0表示女性，sex = 1表示男性
-    """
+    @classmethod
+    def generate_id(cls, sex=0):
+        """ 随机生成身份证号，sex = 0表示女性，sex = 1表示男性 """
 
-    # 随机生成一个区域码(6位数)
-    area_info = random.randint(0, len(addr))
-    id_number = str(addr[area_info][0])
-
-    # 限定出生日期范围(8位数)
-    start, end = "1960-01-01", "2000-12-30"
-
-    days = (datetime.datetime.strptime(end, "%Y-%m-%d") - datetime.datetime.strptime(start, "%Y-%m-%d")).days + 1
-    birth_days = datetime.datetime.strftime(
-        datetime.datetime.strptime(start, "%Y-%m-%d") + datetime.timedelta(random.randint(0, days)), "%Y%m%d"
-    )
-
-    id_number += str(birth_days)
-    # 顺序码(2位数)
-    id_number += str(random.randint(10, 99))
-    # 性别码(1位数)
-    id_number += str(random.randrange(sex, 10, step=2))
-    # 校验码(1位数)
-    return id_number + str(cls(id_number).get_check_digit())
+        # 随机生成一个区域码(6位数)
+        id_number = str(random.choice(const.AREA_INFO.keys()))
+        # 限定出生日期范围(8位数)
+        start, end = datetime.strptime("1960-01-01", "%Y-%m-%d"), datetime.strptime("2000-12-30", "%Y-%m-%d")
+        birth_days = datetime.strftime(start + timedelta(random.randint(0, (end - start).days + 1)), "%Y%m%d")
+        id_number += str(birth_days)
+        # 顺序码(2位数)
+        id_number += str(random.randint(9, 99))
+        # 性别码(1位数)
+        id_number += str(random.randrange(sex, 10, step=2))
+        # 校验码(1位数)
+        return id_number + str(cls(id_number).get_check_digit())
  ```
 
 
@@ -82,14 +73,14 @@ def generate_id(cls, sex=0):
 ```python
 if __name__ == '__main__':
     random_sex = random.randint(0, 1)  # 随机生成男(1)或女(0)
-    print IdNumberUtil.generate_id(random_sex)  # 随机生成身份证号
-    print IdNumberUtil('410326199507103197').area_id  # 地址编码:410326
-    print IdNumberUtil('410326199507103197').get_area_name()  # 地址:汝阳县
-    print IdNumberUtil('410326199507103197').get_birthday()  # 生日:1995-7-10
-    print IdNumberUtil('410326199507103197').get_age()  # 年龄:23(岁)
-    print IdNumberUtil('410326199507103197').get_sex()  # 性别:1(男)
-    print IdNumberUtil('410326199507103197').get_check_digit()  # 校验码:7
-    print IdNumberUtil.verify_id('410326199507103198')  # 检验身份证是否正确:False
+    print IdNumber.generate_id(random_sex)  # 随机生成身份证号
+    print IdNumber('410326199507103197').area_id  # 地址编码:410326
+    print IdNumber('410326199507103197').get_area_name()  # 地址:河南省洛阳市汝阳县
+    print IdNumber('410326199507103197').get_birthday()  # 生日:1995-7-10
+    print IdNumber('410326199507103197').get_age()  # 年龄:23(岁)
+    print IdNumber('410326199507103197').get_sex()  # 性别:1(男)
+    print IdNumber('410326199507103197').get_check_digit()  # 校验码:7
+    print IdNumber.verify_id('410326199507103198')  # 检验身份证是否正确:False
 ```
 
 [√]: 代码地址: https://github.com/jayknoxqu/id-number-util
