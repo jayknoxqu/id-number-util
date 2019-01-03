@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Python version 2.7.13
+# Python version 2.7.13 or 3.7.2
 
 import random
 import re
@@ -68,7 +68,7 @@ class IdNumber(str):
         """随机生成身份证号，sex = 0表示女性，sex = 1表示男性"""
 
         # 随机生成一个区域码(6位数)
-        id_number = str(random.choice(const.AREA_INFO.keys()))
+        id_number = str(random.choice(list(const.AREA_INFO.keys())))
         # 限定出生日期范围(8位数)
         start, end = datetime.strptime("1960-01-01", "%Y-%m-%d"), datetime.strptime("2000-12-30", "%Y-%m-%d")
         birth_days = datetime.strftime(start + timedelta(random.randint(0, (end - start).days + 1)), "%Y%m%d")
@@ -83,11 +83,11 @@ class IdNumber(str):
 
 if __name__ == '__main__':
     random_sex = random.randint(0, 1)  # 随机生成男(1)或女(0)
-    print IdNumber.generate_id(random_sex)  # 随机生成身份证号
-    print IdNumber('410326199507103197').area_id  # 地址编码:410326
-    print IdNumber('410326199507103197').get_area_name()  # 地址:河南省洛阳市汝阳县
-    print IdNumber('410326199507103197').get_birthday()  # 生日:1995-7-10
-    print IdNumber('410326199507103197').get_age()  # 年龄:23(岁)
-    print IdNumber('410326199507103197').get_sex()  # 性别:1(男)
-    print IdNumber('410326199507103197').get_check_digit()  # 校验码:7
-    print IdNumber.verify_id('410326199507103198')  # 检验身份证是否正确:False
+    print(IdNumber.generate_id(random_sex))  # 随机生成身份证号
+    print(IdNumber('410326199507103197').area_id)  # 地址编码:410326
+    print(IdNumber('410326199507103197').get_area_name())  # 地址:河南省洛阳市汝阳县
+    print(IdNumber('410326199507103197').get_birthday())  # 生日:1995-7-10
+    print(IdNumber('410326199507103197').get_age())  # 年龄:23(岁)
+    print(IdNumber('410326199507103197').get_sex())  # 性别:1(男)
+    print(IdNumber('410326199507103197').get_check_digit())  # 校验码:7
+    print(IdNumber.verify_id('410326199507103198'))  # 检验身份证是否正确:False
